@@ -1,0 +1,3 @@
+[submodule "unsorted/lib/text_on"]
+	path = unsorted/lib/text_on
+	url = https://github.com/brodykenrick/text_on_OpenSCAD.git
