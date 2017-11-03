@@ -66,14 +66,6 @@ alot = 100;
 // main soild
 //=============================================================================
 
-module round_cube(sides, r = 0, center = false) {
-    translate(center ? [0,0,0] : [r,r,r])
-    minkowski() {
-        cube([sides[0]-r, sides[1]-r, sides[2]-r], center = center);
-        sphere(r = r);
-    }
-}
-
 module raceway_3d(d, l, h) {
     hull() {
         translate([0,-l/2+d/2, 0])
