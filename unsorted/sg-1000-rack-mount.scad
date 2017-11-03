@@ -51,6 +51,12 @@ rack_tab_y = plate_l - rack_tab_l;
 rack_screw_y = plate_l - rack_screw_y_from_top;
 rack_slot_y = rack_screw_y - rack_screw_to_slot_y - rack_screw_slot_l/2 + 3.5; //wtf
 
+vent_anulus = 1;
+vent_x = plate_spacer_x_a + plate_spacer_width + vent_anulus;
+vent_y = vent_x;
+vent_w = plate_spacer_x_b - (plate_spacer_x_a + plate_spacer_width) - 2*vent_anulus;
+vent_l = plate_l - vent_x * 2;
+
 $fn = 100;
 
 abit = 0.001;
@@ -104,7 +110,9 @@ module rounded_rect_3d(dim, r, center = true) {
 difference() {
     union() {
         // Main Plate
-        cube([plate_w, plate_l, plate_height]);
+        rounded_rect_3d([plate_w, plate_l, plate_height],
+                        r = rack_screw_w/2,
+                        center= false);
         
         // Spacer Bar A
         translate([plate_spacer_x_a, plate_spacer_y, plate_height-abit])
@@ -136,5 +144,8 @@ difference() {
     translate([rack_screw_x, rack_slot_y, -alot/2])
     raceway_3d(d = rack_screw_dia, l = rack_screw_slot_l, h = alot);
     
+    // Vent Hole
+    translate([vent_x,vent_y,-alot/2])
+    rounded_rect_3d([vent_w, vent_l, alot], r = 2, center = false);
     
 }
