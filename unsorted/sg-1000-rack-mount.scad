@@ -27,7 +27,7 @@ plate_spacer_depth = 1.25;
 plate_spacer_y = 15;
 plate_spacer_length = plate_l - (plate_spacer_y * 2);
 plate_spacer_width = 5;
-plate_spacer_x_a = 7;
+plate_spacer_x_a = 6.5;
 plate_spacer_x_b = plate_w - plate_spacer_width - plate_spacer_x_a;
 
 body_screw_dia = 3; // hole size
@@ -38,7 +38,7 @@ body_screw_standoff_height = plate_spacer_depth;
 
 rack_screw_w = 18;
 rack_screw_dia = 7; // hole size
-rack_screw_slot_l = 23;
+rack_screw_slot_l = 28;
 rack_screw_x = -((rack_screw_dia/2) + 5);
 rack_screw_y_from_top = rack_screw_w/2;
 rack_screw_to_slot_y = 12.4; // head size
