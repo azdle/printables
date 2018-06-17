@@ -1,9 +1,9 @@
 //=============================================================================
-// sg-1000-rack-mount.scad
+// netgear-switch-rack-mount.scad
 //
-// For moutning a Netgate SG-1000 off the side of a rack.
+// For mounting a Netgear GS108PE PoE switch off the side of a rack.
 //=============================================================================
-// Written in 2017 by Patrick Barrett
+// Written in 2018 by Patrick Barrett
 //
 // To the extent possible under law, the author(s) have dedicated all copyright
 // and related and neighboring rights to this work to the public domain
@@ -20,21 +20,15 @@
 //=============================================================================
 
 plate_height = 2.75;
-plate_w = 51;
-plate_l = 78.5;
-
-plate_spacer_depth = 1.25;
-plate_spacer_y = 15;
-plate_spacer_length = plate_l - (plate_spacer_y * 2);
-plate_spacer_width = 5;
-plate_spacer_x_a = 6.5;
-plate_spacer_x_b = plate_w - plate_spacer_width - plate_spacer_x_a;
+plate_w = 60;
+plate_l = 100;
 
 body_screw_dia = 3; // hole size
-body_screw_x = 25.25;
-body_screw_y = 71;
+body_screw_x = 50;
+body_screw_y1 = 10;
+body_screw_y2 = 90;
 body_screw_standoff_dia = 8;
-body_screw_standoff_height = plate_spacer_depth;
+body_screw_standoff_height = 1;
 
 rack_screw_w = 18;
 rack_screw_dia = 7; // hole size
@@ -51,11 +45,11 @@ rack_tab_y = plate_l - rack_tab_l;
 rack_screw_y = plate_l - rack_screw_y_from_top;
 rack_slot_y = rack_screw_y - rack_screw_to_slot_y - rack_screw_slot_l/2 + 3.5; //wtf
 
-vent_anulus = 1;
-vent_x = plate_spacer_x_a + plate_spacer_width + vent_anulus;
-vent_y = vent_x;
-vent_w = plate_spacer_x_b - (plate_spacer_x_a + plate_spacer_width) - 2*vent_anulus;
-vent_l = plate_l - vent_x * 2;
+vent_anulus = 20;
+vent_x = vent_anulus;
+vent_y = vent_anulus;
+vent_w = plate_w - 2*vent_anulus;
+vent_l = plate_l - 2*vent_anulus;
 
 $fn = 100;
 
@@ -106,16 +100,11 @@ difference() {
                         r = rack_screw_w/2,
                         center= false);
         
-        // Spacer Bar A
-        translate([plate_spacer_x_a, plate_spacer_y, plate_height-abit])
-        cube([plate_spacer_width, plate_spacer_length, plate_spacer_depth]);
-        
-        // Spacer Bar B
-        translate([plate_spacer_x_b, plate_spacer_y, plate_height-abit])
-        cube([plate_spacer_width, plate_spacer_length, plate_spacer_depth]);
-        
-        // Body Screw Spacer
-        translate([body_screw_x, body_screw_y, plate_height-abit])
+        // Top Screw Spacer
+        translate([body_screw_x, body_screw_y1, plate_height-abit])
+        cylinder(d = body_screw_standoff_dia, h = body_screw_standoff_height);
+        // Bottom Screw Spacer
+        translate([body_screw_x, body_screw_y2, plate_height-abit])
         cylinder(d = body_screw_standoff_dia, h = body_screw_standoff_height);
         
         // Rack Tab
@@ -124,8 +113,11 @@ difference() {
                         r = rack_screw_w/2);
     }
     
-    // Body Screw Hole
-    translate([body_screw_x, body_screw_y, -alot/2])
+    // Top Screw Hole
+    translate([body_screw_x, body_screw_y1, -alot/2])
+    cylinder(d = body_screw_dia, h = alot);
+    // Bottom Screw Hole
+    translate([body_screw_x, body_screw_y2, -alot/2])
     cylinder(d = body_screw_dia, h = alot);
     
     // Rack Screw Hole
