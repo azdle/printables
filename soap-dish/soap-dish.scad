@@ -53,7 +53,7 @@ s_key_bot = mount_above_shelf ? s_key_s : s_key_l;
 
 // more back wall
 ba_radius_around_hook = s_key_l/2 + wall;
-ba_radius_side = b_length/2 - s_radius - ba_radius_around_hook;
+ba_radius_side = b_length/2 - s_radius - ba_radius_around_hook - wall;
 
 abit = 0.001; //use for making overlap to get single manifold stl
 alot = 250;
@@ -165,12 +165,24 @@ difference() {
             // round left back
             translate([0,alot,ba_radius_side+wall+b_lip])
             rotate([90,0,0])
-            cylinder(r = ba_radius_side, h = alot);
+            hull(){
+                cylinder(r = ba_radius_side, h = alot);
+                translate([wall,0,0])
+                cylinder(r = ba_radius_side, h = alot);
+                translate([wall,wall,0])
+                cylinder(r = ba_radius_side, h = alot);
+            }
             
             //round right back
             translate([b_length,alot,ba_radius_side+wall+b_lip])
             rotate([90,0,0])
-            cylinder(r = ba_radius_side, h = alot);
+            hull(){
+                cylinder(r = ba_radius_side, h = alot);
+                translate([-wall,0,0])
+                cylinder(r = ba_radius_side, h = alot);
+                translate([-wall,wall,0])
+                cylinder(r = ba_radius_side, h = alot);
+            }
         }
     
         // back wall
