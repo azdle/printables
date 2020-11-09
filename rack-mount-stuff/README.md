@@ -1,8 +1,22 @@
-I'm starting working on mounting all my (non-rack-sized) networking equipment in the side of my rack to get it out of the way for new rack-sized things.
+These are mounts that mount my networking equipment on the *side* of my rack. My rack has standard rack nut squares down the side, 90 degrees off the front, that I use to mount these brackets. If you use this on the standard front or back mounting positions you'll end up with these devices sitting across the face (or back) of your rack.
+
+# APU Rack Mount
+
+This mounts a PCEngines APU2 standard enclosure to any standard server rack pattern.
+
+## Printing Instructions
+
+Print one normally and optionally print a second mirrored across the shorter dimension for the other side for a stronger mount. You might only be able to fit a single cage screw on the second side.
+
+## Parts Needed (Per Print)
+
+* 2x Screws to mate to enclosure (I don't remember the size)
+* 2x M5/6 Cage Screws & Nuts
+
 
 # Netgate SG-1000 Firewall Rack Mount
 
-This vertically mounts an SG-1000 to any standard server rack. I've used it on the side, should just work the face of the rack too.
+This mounts a Netgate SG-1000 to any standard server rack.
 
 ## Parts Needed
 
