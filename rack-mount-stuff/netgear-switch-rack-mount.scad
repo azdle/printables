@@ -19,7 +19,7 @@
 // dimensions
 //=============================================================================
 
-plate_height = 2.75;
+plate_height = 8;
 plate_w = 60;
 plate_l = 100;
 
@@ -30,6 +30,7 @@ body_screw_y2 = 90;
 body_screw_standoff_dia = 8;
 body_screw_standoff_height = 1;
 
+rack_tab_top = false;
 rack_screw_w = 18;
 rack_screw_dia = 7; // hole size
 rack_screw_slot_l = 28;
@@ -41,9 +42,11 @@ rack_tab_l = rack_screw_y_from_top +
              rack_screw_slot_l +
              rack_screw_w/2 -
              3.5 * 2; // wtf
-rack_tab_y = plate_l - rack_tab_l;
-rack_screw_y = plate_l - rack_screw_y_from_top;
-rack_slot_y = rack_screw_y - rack_screw_to_slot_y - rack_screw_slot_l/2 + 3.5; //wtf
+rack_tab_y = rack_tab_top ? plate_l - rack_tab_l : 0;
+rack_screw_y = rack_tab_top ? plate_l - rack_screw_y_from_top: rack_screw_y_from_top;
+rack_slot_y = rack_tab_top
+    ? rack_screw_y - rack_screw_to_slot_y - rack_screw_slot_l/2 + 3.5 //wtf
+    : rack_screw_y + rack_screw_y_from_top + rack_screw_slot_l/2;
 
 vent_anulus = 20;
 vent_x = vent_anulus;
