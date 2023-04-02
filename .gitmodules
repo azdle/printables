@@ -1,3 +1,9 @@
 [submodule "unsorted/lib/text_on"]
 	path = unsorted/lib/text_on
 	url = https://github.com/brodykenrick/text_on_OpenSCAD.git
+[submodule "lib/scad-utils"]
+	path = lib/scad-utils
+	url = git@github.com:openscad/scad-utils.git
+[submodule "lib/BOSL2"]
+	path = lib/BOSL2
+	url = https://github.com/revarbat/BOSL2.git
