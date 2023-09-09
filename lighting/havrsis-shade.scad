@@ -16,31 +16,51 @@
 // dimensions
 //=============================================================================
 
+include <BOSL2/std.scad>
+
 wall = 1;
 
-body_id = 65;
+body_base_id = 65;
+body_end_id = 145;
 body_h = 120;
 
 socket_d = 40;
+socket_body_d = 47.9;
+socket_body_l = 50; // ?
 
 $fn = 150;
 
 abit = 0.01;
 alot = 1000;
 
-body_od = body_id + 2*wall;
+body_base_od = body_base_id + 2*wall;
+body_end_od = body_end_id + 2*wall;
+
+slot_w = (body_base_id - socket_body_d)/4;
+slot_d = body_base_id - (body_base_id - socket_body_d)/2;
 
 //=============================================================================
 // main soild
 //=============================================================================
 
 difference() {
-    cylinder(d = body_od, h = body_h);
+    // main body
+    cylinder(d1 = body_base_od, d2 = body_end_od, h = body_h);
     
+    // main cavity
     translate([0,0,wall])
-    cylinder(d = body_id, h = alot);
+    cylinder(d1 = body_base_id, d2 = body_end_id, h = body_h);
     
+    // socket hole
     translate([0,0,-abit])
     cylinder(d = socket_d, h = alot);
-}
     
+    // vent holes
+    zrot_copies(n=4)
+    linear_extrude(alot, center=true)
+    stroke(arc(r=slot_d/2, angle=45, start=45/2), width = slot_w);
+    
+    // socket body shadow
+    %translate([0,0,-socket_body_l])
+    cylinder(d = socket_body_d, h = socket_body_l);
+}
